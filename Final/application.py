@@ -30,7 +30,21 @@ class User(db.Model):
         return '<User {}>'.format(self.username)  
 
 
- 
+class Home(db.Model):
+    houseid = db.Column(db.Integer, unique=True,autoincrement=True, primary_key=True)
+    address = db.Column(db.String(100), unique=True, primary_key=True)
+    construction_date = db.Column(db.Integer)
+    acres = db.Column(db.Integer)
+    status = db.Column(db.Tinyint, primary_key=True)
+    def __init__(self,construction_date,address,acres,status):
+        self.construction_date = construction_date
+        self.address = address
+        self.acres = acres
+        self.status = status
+    def __repr__(self):
+        return '<Home {}>'.format(self.houseid)
+class User(db.Model):
+    
 @application.route("/")
 def home():
     if not session.get('logged_in'):
